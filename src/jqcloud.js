@@ -44,6 +44,12 @@ jQCloud.DEFAULTS = {
     template: null
 };
 
+jQCloud.rndAngle = 0.24431663595432496;
+jQCloud.rndWordSize0 = 0.7281218162044427;
+jQCloud.rndWordSize1 = 0.8543708763717666;
+jQCloud.rndWordSize2 = 0.43898249452311844;
+jQCloud.rndWordSize3 = 0.11003478939946731;
+
 jQCloud.prototype = {
     initialize: function() {
         // Set/Get dimensions
@@ -126,7 +132,7 @@ jQCloud.prototype = {
             }
         }
 
-        this.data.angle = Math.random() * 6.28;
+        this.data.angle = (this.options.fixed ? jQCloud.rndAngle : Math.random()) * 6.28;
         this.data.step = (this.options.shape === 'rectangular') ? 18.0 : 2.0;
         this.data.aspect_ratio = this.options.width / this.options.height;
         this.clearTimeouts();
@@ -345,16 +351,16 @@ jQCloud.prototype = {
 
                 switch (quarter_turns % 4) {
                     case 1:
-                        word_size.left += this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
+                        word_size.left += this.data.step * this.data.aspect_ratio + (this.options.fixed ? jQCloud.rndWordSize1 : Math.random()) * 2.0;
                         break;
                     case 2:
-                        word_size.top -= this.data.step + Math.random() * 2.0;
+                        word_size.top -= this.data.step + (this.options.fixed ? jQCloud.rndWordSize2 : Math.random()) * 2.0;
                         break;
                     case 3:
-                        word_size.left -= this.data.step * this.data.aspect_ratio + Math.random() * 2.0;
+                        word_size.left -= this.data.step * this.data.aspect_ratio + (this.options.fixed ? jQCloud.rndWordSize3 : Math.random()) * 2.0;
                         break;
                     case 0:
-                        word_size.top += this.data.step + Math.random() * 2.0;
+                        word_size.top += this.data.step + (this.options.fixed ? jQCloud.rndWordSize0 : Math.random()) * 2.0;
                         break;
                 }
             }
